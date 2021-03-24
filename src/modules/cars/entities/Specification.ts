@@ -3,7 +3,7 @@ import {
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-@Entity()
+@Entity('specifications')
 class Specification {
   @PrimaryColumn()
   id?: string;
