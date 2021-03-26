@@ -21,6 +21,9 @@ export class User {
   driver_license:string
 
   @Column()
+  avatar: string
+
+  @Column()
   isAdmin:boolean
 
   @CreateDateColumn()
