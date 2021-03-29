@@ -1,8 +1,9 @@
 import { verify } from 'jsonwebtoken';
 
-import { AppError } from '../../../../errors/AppError';
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { UsersRepositoryInMemory } from '../../repositories/in-memory/UsersRepositoryInMemory';
+import { ICreateUserDTO } from '@accounts/dtos/ICreateUserDTO';
+import { UsersRepositoryInMemory } from '@accounts/repositories/in-memory/UsersRepositoryInMemory';
+import { AppError } from '@errors/AppError';
+
 import { CreateUserUseCase } from '../CreateUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
