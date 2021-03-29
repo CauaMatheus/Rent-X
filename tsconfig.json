@@ -15,6 +15,12 @@
       ],
       "@utils/*": [
         "utils/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@shared/*": [
+        "shared/*"
       ]
     },
     "esModuleInterop": true,

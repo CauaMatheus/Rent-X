@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { SpecificationsRepository } from '@cars/repositories/implementations/SpecificationsRepository';
+import { SpecificationsRepository } from '@cars/infra/typeorm/repositories/SpecificationsRepository';
 import { ICreateSpecificationsDTO } from '@cars/repositories/ISpecificationsRepository';
 
 @injectable()
