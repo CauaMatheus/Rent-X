@@ -23,7 +23,7 @@ describe('Create Car', () => {
       fine_amount: 60,
       license_plate: 'Plate',
     };
-    const createdCar = createCarsUseCase.execute(car);
+    const createdCar = await createCarsUseCase.execute(car);
 
     expect(createdCar).toHaveProperty('id');
   });
