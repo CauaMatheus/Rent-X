@@ -5,7 +5,7 @@ import { ListAvailableCarsUseCase } from './ListAvailableCarsUseCase';
 
 class ListAvailableCarsUseCaseController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { brand, name, category_id } = request.body;
+    const { brand, name, category_id } = request.query;
 
     const listAvailableCarsUseCase = container.resolve(ListAvailableCarsUseCase);
     const cars = await listAvailableCarsUseCase.execute({
