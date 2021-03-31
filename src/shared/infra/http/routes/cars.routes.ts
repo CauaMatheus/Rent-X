@@ -16,6 +16,6 @@ carsRoutes.post('/',
   ensureAdmin,
   createCarsController.handle);
 
-carsRoutes.get('/', listAvailableCarsUseCaseController.handle);
+carsRoutes.get('/available', listAvailableCarsUseCaseController.handle);
 
 export { carsRoutes };
