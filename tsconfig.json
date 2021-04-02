@@ -10,6 +10,9 @@
       "@accounts/*": [
         "modules/accounts/*"
       ],
+      "@rentals/*": [
+        "modules/rentals/*"
+      ],
       "@errors/*": [
         "errors/*"
       ],
