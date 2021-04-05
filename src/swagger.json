@@ -9,11 +9,50 @@
     }
   },
   "paths":{
+    "/sessions":{
+      "post":{
+        "tags": ["User"],
+        "summary": "Authentication User",
+        "description": "Authentication User",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema": {
+                "type": "object",
+                "properties":{
+                  "email": {
+                    "type": "string"
+                  },
+                  "password":{
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "email": "email@example.com",
+                  "password": "passwordexample123"
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "200": {
+            "description": "Authenticated"
+          },
+          "400": {
+            "description": "Email or Password Incorrect"
+          }
+        }
+      }
+    },
     "/categories":{
       "post":{
         "tags": ["Category"],
-        "sumary": "Create an category",
-        "description": "Create a new category",
+        "summary": "Create categories",
+        "description": "`only admin` Create a new category",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "requestBody":{
           "content":{
             "application/json":{
@@ -46,7 +85,7 @@
       },
       "get":{
         "tags":["Category"],
-        "sumary": "List categories",
+        "summary": "List categories",
         "description": "List all categories",
         "responses":{
           "200":{
@@ -58,8 +97,11 @@
     "/categories/import":{
       "post":{
         "tags":["Category"],
-        "sumary": "Import categories",
-        "description":"Import categories from a csv archive",
+        "summary": "Import categories",
+        "description":"`only admin` Import categories from a csv archive",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "requestBody":{
           "content":{
             "multipart/form-data":{
@@ -85,6 +127,11 @@
     "/specifications":{
       "post":{
         "tags": ["Specifications"],
+        "summary": "Create specifications",
+        "description":"`only admin` Create a new specification",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "requestBody":{
           "content":{
             "application/json":{
@@ -105,9 +152,100 @@
       },
       "get":{
         "tags":["Specifications"],
+        "summary": "List specifications",
+        "description": "List all specifications",
         "responses":{
           "200":{
             "description":"List all specifications"
+          }
+        }
+      }
+    },
+    "/cars":{
+      "post": {
+        "tags": ["Car"],
+        "summary": "Create cars",
+        "description": "`only admin` Create a new car",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "name": "string",
+                  "description": "string",
+                  "daily_rate": "number",
+                  "license_plate": "string",
+                  "fine_amount": "number",
+                  "brand": "string",
+                  "category_id": "string"
+                },
+                "example":{
+                  "name": "Car Name Example",
+                  "description": "Car Description Example",
+                  "daily_rate": 100,
+                  "license_plate": "XXX-1234",
+                  "fine_amount": 50,
+                  "brand": "Brand Name Example",
+                  "category_id": "f4d5e75d-2fa5-4451-be96-34d475e847c5"
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201": {
+            "description": "Created"
+          },
+          "400":{
+            "description": "Car already exists"
+          }
+        }
+      }
+    },
+    "/cars/images/{car_id}":{
+      "post":{
+        "tags": ["Car"],
+        "summary": "Upload images",
+        "description": "Upload multiples images",
+        "parameters":[
+          {
+            "name": "car_id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema":{
+              "type":"string"
+            }
+          }
+        ],
+        "security":[
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201": {
+            "description": "Created/Imported"
           }
         }
       }
@@ -127,6 +265,15 @@
       "example":{
         "name": "Specification name sample",
         "description": "Specification description sample"
+      }
+    }
+  },
+  "components":{
+    "securitySchemes":{
+      "bearerAuth":{
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
