@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 
-let connection:Connection;
+let connection: Connection;
 describe('ListCategoryController', () => {
   beforeAll(async () => {
     connection = await createConnection();
@@ -31,11 +31,13 @@ describe('ListCategoryController', () => {
       password: 'admin',
     });
 
+    const { refresh_token } = responseAuth.body;
+
     await request(app).post('/categories').send({
       name: 'Category Name SuperTest',
       description: 'Category Description SuperTest',
     }).set({
-      Authorization: `Bearer ${responseAuth.body}`,
+      Authorization: `Bearer ${refresh_token}`,
     });
 
     const response = await request(app).get('/categories');

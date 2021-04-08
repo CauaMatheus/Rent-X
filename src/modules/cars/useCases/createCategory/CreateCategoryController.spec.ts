@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 
-let connection:Connection;
+let connection: Connection;
 describe('CreateCategoryController', () => {
   beforeAll(async () => {
     connection = await createConnection();
@@ -31,13 +31,37 @@ describe('CreateCategoryController', () => {
       password: 'admin',
     });
 
+    const { refresh_token } = responseAuth.body;
+
     const response = await request(app).post('/categories').send({
       name: 'Category Name SuperTest',
       description: 'Category Description SuperTest',
     }).set({
-      Authorization: `Bearer ${responseAuth.body}`,
+      Authorization: `Bearer ${refresh_token}`,
     });
 
     expect(response.status).toBe(201);
+  });
+
+  it('should not be able to create a new category when the user is not admin', async () => {
+    await request(app).post('/users').send({
+      name: 'User Name',
+      email: 'email@example.com',
+      password: 'password',
+      driver_license: 'X',
+    });
+    const authResponse = await request(app).post('/sessions').send({
+      email: 'email@example.com',
+      password: 'password',
+    });
+
+    const response = await request(app).post('/categories').send({
+      name: 'Category Name SuperTest',
+      description: 'Category Description SuperTest',
+    }).set({
+      Authorization: `Bearer ${authResponse.body.refresh_token}`,
+    });
+
+    expect(response.status).toBe(400);
   });
 });
