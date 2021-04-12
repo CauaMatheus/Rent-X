@@ -9,15 +9,15 @@ import { AppError } from '@errors/AppError';
 export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
-      private usersRepository:IUsersRepository,
+    private usersRepository: IUsersRepository,
   ) { }
 
   async execute({
     name, password, email, driver_license,
-  }:ICreateUserDTO):Promise<void> {
+  }: ICreateUserDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
     if (userAlreadyExists) {
-      throw new AppError('User already Exists');
+      throw new AppError('User already exist');
     }
 
     const hashedPassword = await hash(password, 12);

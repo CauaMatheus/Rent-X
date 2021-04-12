@@ -4,9 +4,15 @@ import { UsersToken } from '@accounts/infra/typeorm/entities/UsersToken';
 class UsersTokenRepositoryInMemory {
   private repository: UsersToken[] = []
 
-  async create(data: ICreateUsersTokenDTO): Promise<UsersToken> {
+  async create({
+    user_id,
+    expires_date,
+    refresh_token,
+  }: ICreateUsersTokenDTO): Promise<UsersToken> {
     const token = new UsersToken();
-    Object.assign(token, data);
+    Object.assign(token, { user_id, expires_date, refresh_token });
+
+    this.repository.push(token);
     return token;
   }
 
