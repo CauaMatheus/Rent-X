@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   Entity, Column, PrimaryColumn, CreateDateColumn,
 } from 'typeorm';
@@ -9,25 +10,37 @@ export class User {
   id: string
 
   @Column()
-  name:string
+  name: string
 
   @Column()
-  password:string
+  password: string
 
   @Column()
-  email:string
+  email: string
 
   @Column()
-  driver_license:string
+  driver_license: string
 
   @Column()
   avatar: string
 
   @Column()
-  isAdmin:boolean
+  isAdmin: boolean
 
   @CreateDateColumn()
   created_at: Date
+
+  @Expose({ name: 'avatar_url' })
+  avatar_url(): string {
+    switch (process.env.disk) {
+      case 'local':
+        return `${process.env.APP_API_URL}/avatar/${this.avatar}`;
+      case 's3':
+        return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
+      default:
+        return null;
+    }
+  }
 
   constructor() {
     if (!this.id) {
