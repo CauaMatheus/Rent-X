@@ -31,13 +31,13 @@ describe('CreateCategoryController', () => {
       password: 'admin',
     });
 
-    const { refresh_token } = responseAuth.body;
+    const { token } = responseAuth.body;
 
     const response = await request(app).post('/categories').send({
       name: 'Category Name SuperTest',
       description: 'Category Description SuperTest',
     }).set({
-      Authorization: `Bearer ${refresh_token}`,
+      Authorization: `Bearer ${token}`,
     });
 
     expect(response.status).toBe(201);
@@ -59,7 +59,7 @@ describe('CreateCategoryController', () => {
       name: 'Category Name SuperTest',
       description: 'Category Description SuperTest',
     }).set({
-      Authorization: `Bearer ${authResponse.body.refresh_token}`,
+      Authorization: `Bearer ${authResponse.body.token}`,
     });
 
     expect(response.status).toBe(400);

@@ -1,4 +1,3 @@
-import { hash } from 'bcrypt';
 import request from 'supertest';
 import { Connection } from 'typeorm';
 import { v4 as uuid } from 'uuid';
@@ -13,10 +12,9 @@ describe('ListCategoryController', () => {
     await connection.runMigrations();
 
     const id = uuid();
-    const password = await hash('admin', 12);
     await connection.query(
-      `INSERT INTO USERS(id, name, password, email, driver_license, "isAdmin", created_at)
-      values('${id}', 'admin', '${password}', 'admin@rentx.com', 'D', true, 'now()')`,
+      `INSERT INTO categories (id, name, description)
+      values ('${id}', 'CategoryExample', 'CategoryDescription')`,
     );
   });
 
@@ -26,20 +24,6 @@ describe('ListCategoryController', () => {
   });
 
   it('should be able to list all categories', async () => {
-    const responseAuth = await request(app).post('/sessions').send({
-      email: 'admin@rentx.com',
-      password: 'admin',
-    });
-
-    const { refresh_token } = responseAuth.body;
-
-    await request(app).post('/categories').send({
-      name: 'Category Name SuperTest',
-      description: 'Category Description SuperTest',
-    }).set({
-      Authorization: `Bearer ${refresh_token}`,
-    });
-
     const response = await request(app).get('/categories');
 
     expect(response.status).toBe(200);
