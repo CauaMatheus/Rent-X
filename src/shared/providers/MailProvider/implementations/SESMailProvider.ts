@@ -24,14 +24,11 @@ class SESMailProvider implements IMailProvider {
     const templateParse = handlebars.compile(templateFileContent);
     const templateHTML = templateParse(variables);
 
-    const sendEmail = await this.client.sendMail({
+    await this.client.sendMail({
       to,
       subject,
       html: templateHTML,
     });
-
-    console.log('Message sent: %s', sendEmail.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(sendEmail));
   }
 }
 
