@@ -1,6 +1,6 @@
 import { Specification } from '@cars/infra/typeorm/entities/Specification';
 
-interface ICreateCarsDTO{
+interface ICreateCarsDTO {
   id?: string
   name: string
   description: string

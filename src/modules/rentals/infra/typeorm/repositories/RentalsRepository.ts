@@ -6,7 +6,7 @@ import { IRentalsRepository } from '@rentals/repositories/IRentalsRepository';
 import { Rental } from '../entities/Rental';
 
 class RentalsRepository implements IRentalsRepository {
-  private repository:Repository<Rental>
+  private repository: Repository<Rental>
 
   constructor() {
     this.repository = getRepository(Rental);
@@ -19,7 +19,7 @@ class RentalsRepository implements IRentalsRepository {
     end_date,
     total,
     expected_return_date,
-  }:ICreateRentalsDTO): Promise<Rental> {
+  }: ICreateRentalsDTO): Promise<Rental> {
     const rental = this.repository.create({
       id,
       car_id,
@@ -32,7 +32,7 @@ class RentalsRepository implements IRentalsRepository {
     return rental;
   }
 
-  async findOpenRentalByCarId(car_id:string):Promise<Rental> {
+  async findOpenRentalByCarId(car_id: string): Promise<Rental> {
     const rental = await this.repository.findOne({
       where: {
         car_id,
@@ -43,7 +43,7 @@ class RentalsRepository implements IRentalsRepository {
     return rental;
   }
 
-  async findOpenRentalByUserId(user_id:string):Promise<Rental> {
+  async findOpenRentalByUserId(user_id: string): Promise<Rental> {
     const rental = await this.repository.findOne({
       where: {
         user_id,
@@ -54,12 +54,12 @@ class RentalsRepository implements IRentalsRepository {
     return rental;
   }
 
-  async findById(id:string):Promise<Rental> {
+  async findById(id: string): Promise<Rental> {
     const rental = this.repository.findOne({ id });
     return rental;
   }
 
-  async findByUserId(id:string):Promise<Rental[]> {
+  async findByUserId(id: string): Promise<Rental[]> {
     const rentals = await this.repository.find({
       where: { user_id: id },
       relations: ['car'],

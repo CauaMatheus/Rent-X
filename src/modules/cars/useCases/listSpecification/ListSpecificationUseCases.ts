@@ -7,10 +7,10 @@ import { SpecificationsRepository } from '@cars/infra/typeorm/repositories/Speci
 class ListSpecificationUseCases {
   constructor(
     @inject('SpecificationsRepository')
-    private specificationRepository:SpecificationsRepository,
-  ) {}
+    private specificationRepository: SpecificationsRepository,
+  ) { }
 
-  async execute():Promise<Specification[]> {
+  async execute(): Promise<Specification[]> {
     const list = await this.specificationRepository.list();
     return list;
   }

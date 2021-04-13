@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { CreateSpecificationUseCases } from './CreateSpecificationUseCases';
 
 class CreateSpecificationController {
-  async handle(request:Request, response:Response):Promise<Response> {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
 
     const createSpecificationUseCases = container.resolve(CreateSpecificationUseCases);

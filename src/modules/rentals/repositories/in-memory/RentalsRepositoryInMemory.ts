@@ -4,7 +4,7 @@ import { Rental } from '@rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '../IRentalsRepository';
 
 class RentalsRepositoryInMemory implements IRentalsRepository {
-  private repository:Rental[] = []
+  private repository: Rental[] = []
 
   async create({
     id,
@@ -13,7 +13,7 @@ class RentalsRepositoryInMemory implements IRentalsRepository {
     end_date,
     expected_return_date,
     total,
-  }:ICreateRentalsDTO):Promise<Rental> {
+  }: ICreateRentalsDTO): Promise<Rental> {
     if (!id) {
       const rental = new Rental();
       Object.assign(rental, {
@@ -33,24 +33,24 @@ class RentalsRepositoryInMemory implements IRentalsRepository {
     return this.repository[rentalIndex];
   }
 
-  async findOpenRentalByCarId(id:string): Promise<Rental> {
+  async findOpenRentalByCarId(id: string): Promise<Rental> {
     const rental = this.repository.find((rental) => !rental.end_date
-    && rental.car_id === id);
+      && rental.car_id === id);
     return rental;
   }
 
-  async findOpenRentalByUserId(id:string): Promise<Rental> {
+  async findOpenRentalByUserId(id: string): Promise<Rental> {
     const rental = this.repository.find((rental) => !rental.end_date
-    && rental.user_id === id);
+      && rental.user_id === id);
     return rental;
   }
 
-  async findById(id:string): Promise<Rental> {
+  async findById(id: string): Promise<Rental> {
     const rental = this.repository.find((rental) => rental.id === id);
     return rental;
   }
 
-  async findByUserId(id:string): Promise<Rental[]> {
+  async findByUserId(id: string): Promise<Rental[]> {
     const rentals = this.repository.filter((rental) => rental.user_id === id);
     return rentals;
   }

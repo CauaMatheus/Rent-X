@@ -11,8 +11,8 @@ import { AppError } from '@errors/AppError';
 class CreateCarsUseCase {
   constructor(
     @inject('CarsRepository')
-    private carsRepository:ICarsRepository,
-  ) {}
+    private carsRepository: ICarsRepository,
+  ) { }
 
   async execute({
     name,
@@ -22,7 +22,7 @@ class CreateCarsUseCase {
     fine_amount,
     brand,
     category_id,
-  }:ICreateCarsDTO): Promise<Car> {
+  }: ICreateCarsDTO): Promise<Car> {
     const CarAlreadyExist = await this.carsRepository.findByLicensePlate(license_plate);
     if (CarAlreadyExist) {
       throw new AppError('Car already exists');

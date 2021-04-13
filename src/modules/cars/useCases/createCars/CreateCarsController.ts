@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { CreateCarsUseCase } from './CreateCarsUseCase';
 
 class CreateCarsController {
-  async handle(request:Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response): Promise<Response> {
     const {
       brand,
       category_id,

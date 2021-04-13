@@ -7,10 +7,10 @@ import { AppError } from '@errors/AppError';
 class CreateCategoryUseCase {
   constructor(
     @inject('CategoriesRepository')
-    private categoriesRepository:ICategoryRepository,
+    private categoriesRepository: ICategoryRepository,
   ) { }
 
-  async execute({ name, description }:ICreateCategoryDTO):Promise<void> {
+  async execute({ name, description }: ICreateCategoryDTO): Promise<void> {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
     if (categoryAlreadyExists) {
       throw new AppError('Category already exists');

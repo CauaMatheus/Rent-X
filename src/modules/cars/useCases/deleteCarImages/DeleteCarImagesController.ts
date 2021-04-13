@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { DeleteCarImagesUseCase } from './DeleteCarImagesUseCase';
 
 class DeleteCarImagesController {
-  async handle(request:Request, response:Response):Promise<Response> {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { image_id } = request.params;
     const deleteCarImagesUseCase = container.resolve(DeleteCarImagesUseCase);
 

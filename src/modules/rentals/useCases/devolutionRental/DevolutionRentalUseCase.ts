@@ -6,7 +6,7 @@ import { Rental } from '@rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@rentals/repositories/IRentalsRepository';
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 
-interface IRequest{
+interface IRequest {
   id: string
   user_id: string
 }
@@ -15,13 +15,13 @@ interface IRequest{
 class DevolutionRentalUseCase {
   constructor(
     @inject('RentalsRepository')
-    private rentalsRepository:IRentalsRepository,
+    private rentalsRepository: IRentalsRepository,
     @inject('CarsRepository')
     private carsRepository: ICarsRepository,
     @inject('DateProvider')
-    private dateProvider:IDateProvider,
+    private dateProvider: IDateProvider,
 
-  ) {}
+  ) { }
 
   async execute({ id, user_id }: IRequest): Promise<Rental> {
     const minimumDaily = 1;

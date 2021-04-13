@@ -4,7 +4,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { CategoriesRepository } from '@cars/infra/typeorm/repositories/CategoriesRepository';
 
-interface IImportCategories{
+interface IImportCategories {
   name: string,
   description: string
 }
@@ -14,12 +14,12 @@ class ImportCategoriesUseCase {
   constructor(
     @inject('CategoriesRepository')
     private categoriesRepository: CategoriesRepository,
-  ) {}
+  ) { }
 
-  loadCategories(file:Express.Multer.File):Promise<IImportCategories[]> {
+  loadCategories(file: Express.Multer.File): Promise<IImportCategories[]> {
     return new Promise((resolve, reject) => {
       const fileParser = csvParse();
-      const categories:IImportCategories[] = [];
+      const categories: IImportCategories[] = [];
 
       const stream = fs.createReadStream(file.path);
       stream.pipe(fileParser);
@@ -40,7 +40,7 @@ class ImportCategoriesUseCase {
     });
   }
 
-  async execute(file:Express.Multer.File):Promise<void> {
+  async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file);
 
     categories.forEach(async (category) => {

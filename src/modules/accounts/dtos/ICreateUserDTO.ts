@@ -1,9 +1,9 @@
-interface ICreateUserDTO{
+interface ICreateUserDTO {
   id?: string
-  email:string
+  email: string
   name: string
-  password:string
+  password: string
   driver_license: string
-  avatar?:string
+  avatar?: string
 }
 export { ICreateUserDTO };

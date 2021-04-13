@@ -5,7 +5,7 @@ import { ICreateSpecificationsDTO, ISpecificationsRepository } from '../ISpecifi
 class SpecificationsRepositoryInMemory implements ISpecificationsRepository {
   private repository: Specification[] = []
 
-  async create({ name, description }:ICreateSpecificationsDTO): Promise<Specification> {
+  async create({ name, description }: ICreateSpecificationsDTO): Promise<Specification> {
     const specification = new Specification();
     Object.assign(specification, { name, description });
 

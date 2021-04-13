@@ -16,14 +16,14 @@ interface IRequest {
 class CreateRentalUseCase {
   constructor(
     @inject('RentalsRepository')
-    private rentalsRepository:IRentalsRepository,
+    private rentalsRepository: IRentalsRepository,
     @inject('DateProvider')
     private dateProvider: IDateProvider,
     @inject('CarsRepository')
     private carsRepository: ICarsRepository,
-  ) {}
+  ) { }
 
-  async execute({ car_id, user_id, expected_return_date }:IRequest):Promise<Rental> {
+  async execute({ car_id, user_id, expected_return_date }: IRequest): Promise<Rental> {
     const minimumHour = 24;
     const unavailableRentalCar = await this.rentalsRepository.findOpenRentalByCarId(car_id);
     if (unavailableRentalCar) {

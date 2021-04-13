@@ -5,7 +5,7 @@ import { ICarsRepository } from '@cars/repositories/ICarsRepository';
 import { ISpecificationsRepository } from '@cars/repositories/ISpecificationsRepository';
 import { AppError } from '@errors/AppError';
 
-interface IRequest{
+interface IRequest {
   specifications_id: string[]
   car_id: string
 }
@@ -17,7 +17,7 @@ class CreateCarSpecificationUseCase {
     private carsRepository: ICarsRepository,
     @inject('SpecificationsRepository')
     private specificationsRepository: ISpecificationsRepository,
-  ) {}
+  ) { }
 
   async execute({ specifications_id, car_id }: IRequest): Promise<Car> {
     const car = await this.carsRepository.findById(car_id);
