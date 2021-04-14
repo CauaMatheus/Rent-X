@@ -6,13 +6,13 @@ module.exports = {
   plugins: [
     ['module-resolver', {
       alias: {
-        '@cars': ['./src/modules/cars'],
-        '@accounts': ['./src/modules/accounts'],
-        '@rentals': ['./src/modules/rentals'],
-        '@errors': ['./src/errors'],
-        '@utils': ['./src/utils'],
-        '@config': ['./src/config'],
-        '@shared': ['./src/shared'],
+        '@cars': './src/modules/cars',
+        '@accounts': './src/modules/accounts',
+        '@rentals': './src/modules/rentals',
+        '@errors': './src/errors',
+        '@utils': './src/utils',
+        '@config': './src/config',
+        '@shared': './src/shared',
       },
     }],
     'babel-plugin-transform-typescript-metadata',
