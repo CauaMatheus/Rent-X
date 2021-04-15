@@ -38,10 +38,10 @@ describe('Import Categories', () => {
 
   it('should not be able to import same categories from a csv multer file', async () => {
     await importCategoriesUseCase.execute(file);
-    fs.writeFileSync(file.path, 'SUV,Utilitário esportivo\nSedan,Automóvel de três volumes\nHatch,Carro curto\n');
+    fs.writeFileSync(file.path, 'Picape,Ótimo para transporte de carga\nSedan,Automóvel de três volumes\nHatch,Carro curto\n');
     await importCategoriesUseCase.execute(file);
     const categories = await categoriesRepository.list();
 
-    expect(categories.length).toBe(3);
+    expect(categories.length).toBe(4);
   });
 });
