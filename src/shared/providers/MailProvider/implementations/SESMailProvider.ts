@@ -25,6 +25,7 @@ class SESMailProvider implements IMailProvider {
     const templateHTML = templateParse(variables);
 
     await this.client.sendMail({
+      from: `Rentx <${process.env.MAIL_ADDRESS}>`,
       to,
       subject,
       html: templateHTML,
