@@ -1,6 +1,5 @@
-import { ICreateUserDTO } from '@accounts/dtos/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '@accounts/repositories/in-memory/UsersRepositoryInMemory';
-import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepository';
+import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepositoryInMemory';
 import { AppError } from '@errors/AppError';
 import { DayjsDateProvider } from '@shared/providers/DateProvider/implementations/DayjsDateProvider';
 
@@ -26,23 +25,16 @@ describe('Authenticate User', () => {
     );
   });
   it('should be able to authenticate an user', async () => {
-    const user: ICreateUserDTO = {
+    await createUserUseCase.execute({
       name: 'User Test',
       email: 'user@test.com',
       password: '1234',
       driver_license: 'D',
-    };
-
-    await createUserUseCase.execute({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      driver_license: user.driver_license,
     });
 
     const authResponse = await authenticateUserUseCase.execute({
-      email: user.email,
-      password: user.password,
+      email: 'user@test.com',
+      password: '1234',
     });
 
     expect(authResponse).toHaveProperty('token');
@@ -62,23 +54,16 @@ describe('Authenticate User', () => {
   });
 
   it('should not be able to authenticate an user with incorrect password', async () => {
-    const user: ICreateUserDTO = {
+    await createUserUseCase.execute({
       name: 'User Test',
       email: 'user@test.com',
       password: '1234',
       driver_license: 'D',
-    };
-
-    await createUserUseCase.execute({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      driver_license: user.driver_license,
     });
 
     await expect(
       authenticateUserUseCase.execute({
-        email: user.email,
+        email: 'user@test.com',
         password: '12345',
       }),
     ).rejects.toEqual(new AppError('Email or password incorrect'));
