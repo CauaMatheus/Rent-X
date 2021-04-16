@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 
 import { UsersRepositoryInMemory } from '@accounts/repositories/in-memory/UsersRepositoryInMemory';
-import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepository';
+import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepositoryInMemory';
 import auth from '@config/auth';
 import { AppError } from '@errors/AppError';
 import { DayjsDateProvider } from '@shared/providers/DateProvider/implementations/DayjsDateProvider';

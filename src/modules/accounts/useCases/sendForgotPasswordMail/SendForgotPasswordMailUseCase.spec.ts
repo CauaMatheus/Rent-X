@@ -1,5 +1,5 @@
 import { UsersRepositoryInMemory } from '@accounts/repositories/in-memory/UsersRepositoryInMemory';
-import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepository';
+import { UsersTokenRepositoryInMemory } from '@accounts/repositories/in-memory/UsersTokenRepositoryInMemory';
 import { AppError } from '@errors/AppError';
 import { DayjsDateProvider } from '@shared/providers/DateProvider/implementations/DayjsDateProvider';
 import { MailProviderInMemory } from '@shared/providers/MailProvider/in-memory/MailProviderInMemory';
