@@ -6,6 +6,8 @@ import swaggerUi from 'swagger-ui-express';
 
 import upload from '@config/upload';
 import { AppError } from '@errors/AppError';
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 
 import swaggerFile from '../../../swagger.json';
 import createConnection from '../typeorm';
@@ -13,11 +15,23 @@ import '@shared/container';
 import rateLimiter from './middlewares/rateLimiter';
 import { router } from './routes';
 
-const app = express();
 createConnection();
 
-app.use(express.json());
+const app = express();
 app.use(rateLimiter);
+
+Sentry.init({
+  dsn: process.env.SENTRY_DNS,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Tracing.Integrations.Express({ app }),
+  ],
+  tracesSampleRate: 1.0,
+});
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
+
+app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
@@ -25,6 +39,8 @@ app.use('/avatar', express.static(`${upload.tempFolder}/avatar`));
 app.use('/cars', express.static(`${upload.tempFolder}/cars`));
 
 app.use(router);
+
+app.use(Sentry.Handlers.errorHandler());
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => { // eslint-disable-line
