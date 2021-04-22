@@ -14,8 +14,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Create User",
-        "description": "Create an User Account",
+        "summary": "Create user",
+        "description": "Create an user account",
         "requestBody": {
           "content": {
             "application/json": {
@@ -50,7 +50,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get User Profile",
+        "summary": "Get user profile",
         "description": "Get your user profile",
         "security": [
           {
@@ -64,8 +64,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Update User Avatar",
-        "description": "Update an User Avatar",
+        "summary": "Update user avatar",
+        "description": "Update an user avatar",
         "security": [
           {
             "bearerAuth": []
@@ -94,8 +94,8 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Authentication User",
-        "description": "Authentication User",
+        "summary": "Authentication user",
+        "description": "Authentication user",
         "requestBody": {
           "content": {
             "application/json": {
@@ -132,8 +132,8 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Refresh Auth Token",
-        "description": "Refresh Auth Token Using `refresh_token`",
+        "summary": "Refresh auth token",
+        "description": "Refresh auth token using `refresh_token`",
         "requestBody": {
           "content": {
             "application/json": {
@@ -211,7 +211,7 @@
           "Categories"
         ],
         "summary": "Import categories",
-        "description": "`only admin` Import categories from a csv archive",
+        "description": "`only admin` Import categories from a csv file",
         "security": [
           {
             "bearerAuth": []
@@ -467,7 +467,7 @@
           "Rentals"
         ],
         "summary": "Create Rental",
-        "description": "Create a Rental",
+        "description": "Create a rental",
         "security": [
           {
             "bearerAuth": []
