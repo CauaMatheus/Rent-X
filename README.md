@@ -18,7 +18,7 @@
 
 ---
 
-![Diagrama](.github/images/diagrama.png)
+![Diagrama](images/diagrama.png)
 
 ---
 
@@ -50,7 +50,7 @@
 </p>
 
 
-![Exemplo da documentação](.github/images/documentacao_exemplo.png)
+![Exemplo da documentação](images/documentacao_exemplo.png)
 
 
 

@@ -7,4 +7,3 @@ temp/*
 !temp/.gitkeep
 ormconfig.json
 coverage
-images
