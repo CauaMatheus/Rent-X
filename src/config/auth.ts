@@ -1,7 +1,7 @@
 export default {
-  secret_token: '4b28691d69f6698455001cedba8a7c91',
-  expires_in_token: '1h',
-  secret_refresh_token: '735ccec20b8fe8f354e30fbc50960d2c',
-  expires_in_refresh_token: '2d',
-  expires_in_refresh_token_days: 2,
+  secret_token: process.env.JWT_SECRET_TOKEN,
+  expires_in_token: process.env.JWT_EXPIRES_IN_TOKEN,
+  secret_refresh_token: process.env.JWT_SECRET_REFRESH_TOKEN,
+  expires_in_refresh_token: process.env.JWT_EXPIRES_IN_REFRESH_TOKEN,
+  expires_in_refresh_token_days: Number(process.env.JWT_EXPIRES_IN_REFRESH_TOKEN_DAYS),
 };
