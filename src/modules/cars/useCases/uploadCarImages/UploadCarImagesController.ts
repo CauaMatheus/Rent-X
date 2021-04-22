@@ -4,17 +4,21 @@ import { container } from 'tsyringe';
 import { UploadCarImagesUseCase } from './UploadCarImagesUseCase';
 
 interface IFiles {
-  filename: string
+  filename?: string
+  mimetype: string
 }
 
 class UploadCarImagesController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { car_id } = request.params;
     const images = request.files as IFiles[];
-    const images_name = images.map((image) => image.filename);
+    const images_properties = images.map((image) => ({
+      name: image.filename,
+      mimetype: image.mimetype,
+    }));
 
     const uploadCarImageUseCase = container.resolve(UploadCarImagesUseCase);
-    await uploadCarImageUseCase.execute({ car_id, images_name });
+    await uploadCarImageUseCase.execute({ car_id, images_properties });
 
     return response.status(201).send();
   }
