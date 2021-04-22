@@ -24,11 +24,13 @@
                 "properties": {
                   "name": "string",
                   "email": "string",
+                  "password": "string",
                   "driver_license": "string"
                 },
                 "example": {
                   "name": "Username Example",
                   "email": "email@example.com",
+                  "password": "passwordexample123",
                   "driver_license": "X"
                 }
               }
@@ -56,7 +58,12 @@
           {
             "bearerAuth": []
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
       }
     },
     "/users/avatar": {
@@ -85,6 +92,11 @@
                 }
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
           }
         }
       }
@@ -418,6 +430,14 @@
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "404": {
+            "description": "Car not found"
+          }
         }
       }
     },
@@ -542,7 +562,9 @@
           }
         ],
         "responses": {
-          "200": "Ok"
+          "200": {
+            "description": "Ok"
+          }
         }
       }
     }
