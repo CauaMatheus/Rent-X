@@ -10,7 +10,7 @@ export class UpdateUserAvatarController {
     const fileType = request.file.mimetype;
 
     const updateUserAvatarUseCase = container.resolve(UpdateUserAvatarUseCase);
-    await updateUserAvatarUseCase.execute({ id, avatar_file });
+    await updateUserAvatarUseCase.execute({ id, avatar_file, fileType });
 
     return response.status(204).send();
   }
