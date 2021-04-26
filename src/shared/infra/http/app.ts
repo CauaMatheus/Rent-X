@@ -12,13 +12,17 @@ import * as Tracing from '@sentry/tracing';
 import swaggerFile from '../../../swagger.json';
 import createConnection from '../typeorm';
 import '@shared/container';
-import rateLimiter from './middlewares/rateLimiter';
+import rateLimiter, { redisClient } from './middlewares/rateLimiter';
 import { router } from './routes';
 
 createConnection();
 
 const app = express();
-app.use(rateLimiter);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(rateLimiter);
+} else {
+  redisClient.quit();
+}
 
 Sentry.init({
   dsn: process.env.SENTRY_DNS,

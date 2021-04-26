@@ -14,8 +14,8 @@ const redisClient = redis.createClient({
 const limiter = new RateLimiterRedis({
   storeClient: redisClient,
   keyPrefix: 'rentx',
-  points: 5,
-  duration: 5,
+  points: 10,
+  duration: 15,
 });
 
 export default async function rateLimiter(
@@ -30,3 +30,5 @@ export default async function rateLimiter(
     throw new AppError('Too many requests', 429);
   }
 }
+
+export { redisClient };
