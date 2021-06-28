@@ -6,14 +6,6 @@
 
 <br/>
 
-<h3>
-  <p>
-    Está aplicação está no exato momento em deploy na AWS. As requisições podem ser feitas pela url <a href="https://rentx.cauamatheus.com">https://rentx.cauamatheus.com</a>
-  </p>
-  <p>
-    Para saber mais sobre as rotas da aplicação, veja a documentação Swagger.
-  </p>
-</h3>
 <h3 align="center">Diagrama da aplicação</h3>
 
 ---
@@ -43,7 +35,7 @@
 
 <h2>Documentação Swagger</h2>
 <p>
-  Está api contém uma documentação interativa com Swagger. E está acessível neste link <a href="https://rentx.cauamatheus.com/api-docs/">aqui</a>. Mas se quiser testar métodos admin, deverá testar em sua máquina.
+  Está api contém uma documentação interativa com Swagger. Se quiser testar métodos admin, deverá testar em sua máquina.
 </p>
 <p>
   Aqui vai um exemplo de como está a documentação
